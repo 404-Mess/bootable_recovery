@@ -286,12 +286,13 @@ error:
   return -1;
 }
 
-InstallResult ApplyFromSdcard(Device* device, VolumeInfo& vi) {
+InstallResult ApplyFromStorage(Device* device, VolumeInfo& vi) {
   auto ui = device->GetUI();
   ui->Print("Update via sdcard. Mounting sdcard\n");
 
   if (!VolumeManager::Instance()->volumeMount(vi.mId)) {
     return INSTALL_NONE;
+  }
 
   if (do_sdcard_mount() != 0) {
     LOG(ERROR) << "\nFailed to mount sdcard\n";
